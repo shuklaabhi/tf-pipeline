@@ -1,3 +1,3 @@
-resource "aws_s3_bucket" "air-reports" {
-  bucket = "xen-pipeline-via-tf-bucket"
+resource "aws_s3_bucket" "sample" {
+  bucket = "xen-pipeline-via-tf-bucket00"
 }
