@@ -4,11 +4,11 @@ on:
     types: [opened, reopened, synchronize]
 jobs:
   terraform-cloud:
-      name: 'Terraform'
+      name: "TF pipeline PR-${{github.event.pull_request.number}}"
       runs-on: ubuntu-latest
       strategy:
         matrix:
-          tf_version: ['0.15.0']
+          tf_version: ['1.0.9']
           root_dir:
             - infrastructure
       steps:
@@ -21,7 +21,7 @@ jobs:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
       - name: Terraform Init
         id: init
-        run: terraform -chdir=${{ matrix.root_dir }} init -backend=false
+        run: terraform -chdir=${{ matrix.root_dir }} init
       - name: Terraform Format
         id: fmt
         run: terraform -chdir=${{ matrix.root_dir }} fmt -check
@@ -64,4 +64,3 @@ jobs:
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
         run: exit 1
-
