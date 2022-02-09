@@ -12,3 +12,13 @@ resource "aws_instance" "web" {
     Name = "${var.resource_prefix}-test-tf"
   }
 }
+
+
+module "web" {
+  source = "./modules/ec2-machine"
+  ami_id = "ami-081ff4b9aa4e81a08"
+  instance_type = "t2.micro"
+  tags = {
+    Name = "${var.resource_prefix}-test-tf"
+  }
+}
