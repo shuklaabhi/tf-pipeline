@@ -22,5 +22,5 @@ module "web" {
     Name = "test-tf"
   }
   prefix = var.resource_prefix
-  users = ["abhishek", "abhishek"]
+  users = ["0", "abhishek", "abhishek", "0", "1"]
 }

@@ -62,6 +62,16 @@ locals {
       {
         creation_date = "${var.creation_date.year}-${var.creation_date.month}-${var.creation_date.date}"
         project_start_date = "${var.project_start_date[2]}-${var.project_start_date[1]}-${var.project_start_date[0]}"
-      }
+      },
+      # Do some string functions
+    {
+      greetings = format("Hello %s", "Terraform")
+    },
+  {
+    # https://www.terraform.io/language/functions/join
+    _users = join(",", var.users)
+    _owners = join(",", var.owner_names)
+    sorted_owners = join(" -> ", sort(var.owner_names))
+  }
   )
 }
