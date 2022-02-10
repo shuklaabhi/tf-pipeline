@@ -1,5 +1,5 @@
 resource "aws_instance" "this" {
   ami = var.ami_id
   instance_type = var.instance_type
-  tags = var.tags
+  tags = local.final_tags
 }

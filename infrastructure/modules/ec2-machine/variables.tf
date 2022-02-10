@@ -55,5 +55,13 @@ variable "users" {
 }
 
 locals {
-  complexity = "simple"
+  final_tags = merge(
+      var.prefix_tags ? {for tag_name,tag_value in var.tags: "${var.prefix}:${tag_name}" => tag_value} : var.tags,
+      { for idx, owner in var.owner_names: "owner[${idx}]" => owner if owner != ""},
+      { for idx, user in var.users: "user[${idx}]" => user if user != ""},
+      {
+        creation_date = "${var.creation_date.year}-${var.creation_date.month}-${var.creation_date.date}"
+        project_start_date = "${var.project_start_date[2]}-${var.project_start_date[1]}-${var.project_start_date[0]}"
+      }
+  )
 }
